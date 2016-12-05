@@ -131,9 +131,6 @@ describe("input", function () {
                 }
 
                 it('should raise "Invalid JSON"', function (done) {
-                        const touches = randomTouches();
-                        data.touches = data.touches.concat(touches);
-
                         request({
                                 method: "PUT",
                                 uri: "http://localhost:8080/touches",
