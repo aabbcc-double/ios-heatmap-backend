@@ -31,6 +31,9 @@ before(function (done) {
                 return db.dropDatabase();
         }).then(() => {
                 serverProcess = exec("NODE_ENV=test npm start", function (error, stdout, stderr) {
+                        console.log("[Server | Error]:\n", error);
+                        console.log("[Server | stdout]:\n", stdout);
+                        console.log("[Server | stderr]:\n", stderr)
                 });
                 setTimeout(done, 3000);
         }, error => {
