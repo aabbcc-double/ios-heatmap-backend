@@ -65,8 +65,8 @@ module.exports = {
                                         }, {
                                                 $group: {
                                                         _id: {
-                                                                x: { $multiply: [{ $floor: { $divide: ["$x", q]} }, q]},
-                                                                y: { $multiply: [{ $floor: { $divide: ["$y", q]} }, q]},
+                                                                x: { $multiply: [{ $floor: { $divide: ["$x", q] } }, q] },
+                                                                y: { $multiply: [{ $floor: { $divide: ["$y", q] } }, q] },
                                                         },
                                                         height: {
                                                                 $sum: 1
@@ -82,6 +82,18 @@ module.exports = {
                                         delete h._id;
                                         return h;
                                 });
+                        }).then(array => {
+                                let maxHeight = Number.NEGATIVE_INFINITY, minHeight = Number.POSITIVE_INFINITY;
+                                array.forEach(h => {
+                                        maxHeight = Math.max(maxHeight, h.height);
+                                        minHeight = Math.min(minHeight, h.height);
+                                })
+
+                                return {
+                                        maxHeight: maxHeight,
+                                        minHeight: minHeight,
+                                        data: array
+                                }
                         })
                 );
         }

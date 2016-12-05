@@ -189,6 +189,12 @@ describe("output", function () {
                                 }
                         });
 
+                        let maxHeight = Number.NEGATIVE_INFINITY, minHeight = Number.POSITIVE_INFINITY;
+                        heatmap.forEach(h => {
+                                maxHeight = Math.max(h.height, maxHeight);
+                                minHeight = Math.min(h.height, minHeight);
+                        })
+
                         request({
                                 method: "GET",
                                 uri: `http://localhost:8080/touches/scene/${scene}`,
@@ -197,11 +203,14 @@ describe("output", function () {
                                 if (!!error) return done(error);
 
                                 body.meta.code.should.equal(0);
+                                body.data.maxHeight.should.to.eql(maxHeight);
+                                body.data.minHeight.should.to.eql(minHeight);
                                 heatmap.forEach(h1 => {
                                         let currentH;
-                                        body.data.some(h2 => {
+
+                                        body.data.data.some(h2 => {
                                                 currentH = h2;
-                                                return h1.x == h2.x && h1.y == h2.y && h1.height == h2.height;
+                                                return h1.x == h2.x && h1.y == h2.y;
                                         });
 
                                         h1.should.to.eql(currentH);
