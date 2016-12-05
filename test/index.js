@@ -204,7 +204,7 @@ describe("output", function () {
                                                 return h1.x == h2.x && h1.y == h2.y && h1.height == h2.height;
                                         });
 
-                                        h1.should.to.eql|(currentH);
+                                        h1.should.to.eql(currentH);
                                 });
 
                                 done();
