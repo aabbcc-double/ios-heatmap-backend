@@ -65,7 +65,7 @@ module.exports = {
                         throw error;
                 }).catch(error => {
                         if (this.checkIfResponse(error)) return error;
-
+                        console.warn("Error catched", error);
                         return this.create(null, null, error);
                 }).then(response => {
                         if (this.checkIfResponse(response)) return response;
