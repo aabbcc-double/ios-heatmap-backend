@@ -96,5 +96,23 @@ module.exports = {
                                 }
                         })
                 );
+        },
+
+        getScenes: function(req, res, next) {
+                const db = req.db;
+
+                responseView.catch(req, res, next,
+                        Promise.resolve().then(() => {
+                                return db.collection(TOUCHES).aggregate([
+                                        {
+                                                $group: {
+                                                        _id: "$scene"
+                                                }
+                                        }
+                                ]).toArray();
+                        }).then(scenes => {
+                                return scenes.map(s => s._id);
+                        })
+                );
         }
 }
