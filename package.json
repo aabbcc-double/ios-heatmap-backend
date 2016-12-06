@@ -9,7 +9,7 @@
     "debug": "node-debug -p 9090 -c -b false --web-host 0.0.0.0 index.js"
   },
   "author": "Shakhzod Ikromov (GRiMe2D) <aabbcc.double@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "async": "^2.1.4",
     "bluebird": "^3.4.6",
