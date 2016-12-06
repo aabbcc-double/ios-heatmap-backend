@@ -77,6 +77,8 @@ const Heatmap = React.createClass({
                         return <span>Loading...</span>
                 }
 
+                const currentScene = this.state.current;
+
                 const sceneSelect = this.renderScenesSelect();
                 const selectBackground = this.renderSelectBackground();
 
@@ -93,7 +95,9 @@ const Heatmap = React.createClass({
                         height: "100%"
                 }
 
+                const host = require('./host');
                 return <div id="heatmap_container" style={containerStyle}>
+                        <img src={`${host}/images/${currentScene}`}/>
                         <div style={actionContainerStyle}>
                                 {selectBackground}
                                 {sceneSelect}

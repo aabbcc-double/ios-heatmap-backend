@@ -44,8 +44,15 @@ if (cluster.isMaster && config.cluster_enabled) {
         const touchController = require('./controllers/touchController');
         app.put("/touches", touchController.putTouch);
         app.get("/touches/scenes", touchController.getScenes);
-        app.get("/touches/scene/:scene", (req, res, next) => touchController.getTouch(req, res, next, req.params["scene"]) );
+        app.get("/touches/scene/:scene", (req, res, next) => touchController.getTouch(req, res, next, req.params["scene"]));
 
+        /*
+         * Images
+         */
+        const imageController = require('./controllers/imageController');
+        app.get("/images/check/:scene", (req, res, next) => imageController.imageNeeded(req, res, next, req.params["scene"]));
+        app.post("/images/:scene", (req, res, next) => imageController.addImage(req, res, next, req.params["scene"]));
+        app.get("/images/:scene", (req, res, next) => imageController.getImage(req, res, next, req.params["scene"]));
 
         /*
          * Public
