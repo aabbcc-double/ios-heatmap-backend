@@ -43,8 +43,14 @@ if (cluster.isMaster && config.cluster_enabled) {
          */
         const touchController = require('./controllers/touchController');
         app.put("/touches", touchController.putTouch);
+        app.get("/touches/scenes", touchController.getScenes);
         app.get("/touches/scene/:scene", (req, res, next) => touchController.getTouch(req, res, next, req.params["scene"]) );
 
+
+        /*
+         * Public
+         */
+        app.use(express.static("./public/build/"));
         app.use(function (req, res, next) {
                 const responseView = require('./views/response');
 
